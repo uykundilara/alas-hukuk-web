@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blok | ALAS Hukuk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <a href="index.html" class="logo-area">
+        <img class="site-logo" src="assets/logo.png" alt="ALAS Hukuk Logo">
+
+        <div class="logo-text">
+            <h2>ALAS</h2>
+            <p>HUKUK & DANIŞMANLIK</p>
+        </div>
+    </a>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html">Anasayfa</a>
+        <a href="hakkimda.html">Hakkımda</a>
+        <a href="index.html#calisma-alanlari">Çalışma Alanları</a>
+        <a href="makaleler.html">Bloklar</a>
+        <a href="sikca-sorulan-sorular.html">Sıkça Sorulan Sorular</a>
+        <a href="index.html#iletisim">İletişim</a>
+    </nav>
+
+    <button class="menu-btn" onclick="menuAcKapat()">☰</button>
+</header>
+
+<section class="page-hero">
+    <div class="container">
+        <h1 id="blokBaslik">Blok</h1>
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="container">
+
+        <div class="blog-detail-box">
+            <div id="blokIcerik"></div>
+        </div>
+
+        <a href="makaleler.html" class="back-link">← Bloklara Dön</a>
+
+    </div>
+</section>
+
+<script src="bloklar.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    const secilenBlok = bloklar.find(function(blok) {
+        return blok.id === id;
+    });
+
+    const baslik = document.getElementById("blokBaslik");
+    const icerik = document.getElementById("blokIcerik");
+
+    if (secilenBlok) {
+        document.title = secilenBlok.title + " | ALAS Hukuk";
+        baslik.textContent = secilenBlok.title;
+
+        const paragraflar = secilenBlok.content.trim().split(/\n\s*\n/);
+
+        paragraflar.forEach(function(paragraf) {
+            const temizParagraf = paragraf.trim();
+
+            if (temizParagraf.length < 120 && !temizParagraf.endsWith(".")) {
+                const h2 = document.createElement("h2");
+                h2.textContent = temizParagraf;
+                icerik.appendChild(h2);
+            } else {
+                const p = document.createElement("p");
+                p.textContent = temizParagraf;
+                icerik.appendChild(p);
+            }
+        });
+
+    } else {
+        baslik.textContent = "Blok Bulunamadı";
+        icerik.innerHTML = "<p>Aradığınız blok bulunamadı.</p>";
+    }
+</script>
+<script src="script.js"></script>
+</body>
+</html>

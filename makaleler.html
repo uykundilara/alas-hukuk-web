@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloklar | ALAS Hukuk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <a href="index.html" class="logo-area">
+        <img class="site-logo" src="assets/logo.png" alt="ALAS Hukuk Logo">
+
+        <div class="logo-text">
+            <h2>ALAS</h2>
+            <p>HUKUK & DANIŞMANLIK</p>
+        </div>
+    </a>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html">Anasayfa</a>
+        <a href="hakkimda.html">Hakkımda</a>
+        <a href="index.html#calisma-alanlari">Çalışma Alanları</a>
+        <a href="makaleler.html">Bloklar</a>
+        <a href="sikca-sorulan-sorular.html">Sıkça Sorulan Sorular</a>
+        <a href="index.html#iletisim">İletişim</a>
+    </nav>
+
+    <button class="menu-btn" onclick="menuAcKapat()">☰</button>
+</header>
+
+<section class="page-hero">
+    <div class="container">
+        <h1>Bloklar</h1>
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="container">
+
+        <div class="blog-grid" id="blogGrid">
+            <!-- Blok kutuları buraya otomatik gelecek -->
+        </div>
+
+        <a href="index.html" class="back-link">← Anasayfaya Dön</a>
+
+    </div>
+</section>
+
+<script src="bloklar.js"></script>
+
+<script>
+    const blogGrid = document.getElementById("blogGrid");
+
+    bloklar.forEach(function(blok) {
+        const link = document.createElement("a");
+
+        link.href = "blok.html?id=" + blok.id;
+        link.className = "blog-card";
+
+        link.innerHTML = `
+            <h2>${blok.title}</h2>
+        `;
+
+        blogGrid.appendChild(link);
+    });
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
